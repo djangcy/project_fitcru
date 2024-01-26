@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "827362422659",
+    "project_id": "project-fitcru",
+    "storage_bucket": "project-fitcru.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:827362422659:android:f0782642d36e193b1450b6",
+        "android_client_info": {
+          "package_name": "com.project_fitcru.project_fitcru"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDBd-MsiZYYozDRRobZH4PSLFvYV9qIEj0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
