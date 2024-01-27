@@ -1,9 +1,10 @@
+import 'dart:js' as js;
+
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:project_fitcru/config/router/app_router.dart';
 import 'package:project_fitcru/config/themes/theme.dart';
 import 'package:project_fitcru/presentation/widgets/widgets.dart';
-import 'package:url_launcher/url_launcher.dart';
 
 class ExpansionTileWidget extends StatefulWidget {
   const ExpansionTileWidget({
@@ -171,10 +172,7 @@ class _ExpansionTileWidgetState extends State<ExpansionTileWidget> {
                         if (url == null) return;
 
                         if (kIsWeb) {
-                          launchUrl(
-                            Uri.parse(url),
-                            mode: LaunchMode.externalApplication,
-                          );
+                          js.context.callMethod('open', [url]);
                         } else {
                           context.router.push(
                             YoutubePlayerRoute(
