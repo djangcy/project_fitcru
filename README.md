@@ -1,16 +1,30 @@
-# project_fitcru
+# FitCrü Fitness App 💪
 
-A new Flutter project.
+Welcome to FitCrü, a fitness app designed and developed as a demo/portfolio project using Flutter and Firebase. This application showcases a range of skills acquired during its creation, including mobile app development, database integration, and user interface design.
 
-## Getting Started
+FitCrü was intended to be used with a sibling app that is used by one's 'trainer'. The trainer's role is to set the exercises and nutritional plans. The app you're looking at is the client app that consumes this data, and allows the user to add information to track their progress, such as: a weight tracker, progress pictures, and intra-session data.
 
-This project is a starting point for a Flutter application.
+## Features 🧠
 
-A few resources to get you started if this is your first Flutter project:
+*  Sessions
+*  Session Trackers
+*  Nutrition Plan
+*  Weight Tracker
+*  Progress Photo Tracker
+*  Daily Inspirational Quote
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+## Technologies/Libraries 📖
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+* [Flutter](https://flutter.dev/) for [[Mobile](https://flutter.dev/multi-platform/mobile) & [Web](https://flutter.dev/multi-platform/web)]
+  - SM: [Flutter_Bloc](https://pub.dev/packages/flutter_bloc)
+  - Router: [Auto_Route](https://pub.dev/packages/auto_route)
+  - ODM: [Cloud_Firestore_Odm](https://pub.dev/packages/cloud_firestore_odm)
+* [Firebase](https://firebase.google.com/)
+  - Cloud Firestore
+  - Cloud Functions (typescript)
+  - Storage
+  - Hosting
+
+## How to Use FitCrü 🧭
+
+Visit the link ([FitCrü Web](https://project-fitcru.web.app/)). This is the web version of FitCrü and is intended for demo purposes. This app maintains a single user so that visitors do not need to make an account to interact with the app.
