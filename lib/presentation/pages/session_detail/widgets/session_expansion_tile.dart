@@ -1,3 +1,6 @@
+import 'dart:js' as js;
+
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:project_fitcru/config/router/app_router.dart';
 import 'package:project_fitcru/config/themes/theme.dart';
@@ -164,16 +167,21 @@ class _ExpansionTileWidgetState extends State<ExpansionTileWidget> {
                   children: [
                     IconButton(
                       icon: const Icon(Icons.play_arrow_rounded),
-                      onPressed: widget.videoUrl == null
-                          ? null
-                          : () {
-                              context.router.push(
-                                YoutubePlayerRoute(
-                                  exerciseName: widget.title,
-                                  videoUrl: widget.videoUrl!,
-                                ),
-                              );
-                            },
+                      onPressed: () {
+                        final url = widget.videoUrl;
+                        if (url == null) return;
+
+                        if (kIsWeb) {
+                          js.context.callMethod('open', [url]);
+                        } else {
+                          context.router.push(
+                            YoutubePlayerRoute(
+                              exerciseName: widget.title,
+                              videoUrl: widget.videoUrl!,
+                            ),
+                          );
+                        }
+                      },
                     ),
                     IconButton(
                       icon: const Icon(Icons.notes),

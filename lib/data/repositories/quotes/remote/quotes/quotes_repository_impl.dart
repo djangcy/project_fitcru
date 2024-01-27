@@ -7,13 +7,12 @@ class QuotesRepositoryImpl implements QuotesRepository {
 
   final Dio _dio;
 
-  final String baseUrl = 'https://zenquotes.io/api';
+  // Firebase function url. Returns quotes from https://zenquotes.io/api/quotes.
+  final String url = 'https://getquotes-7mve4ox5dq-uc.a.run.app';
 
   @override
   Future<List<QuoteModel>?> getQuotes() async {
-    final Response<List<dynamic>> response = await _dio.get('$baseUrl/quotes');
-
-    // print('Type: ${response.data.runtimeType}, Response: ${response.data}');
+    final Response<List<dynamic>> response = await _dio.get(url);
 
     final List<dynamic>? data = response.data;
 
