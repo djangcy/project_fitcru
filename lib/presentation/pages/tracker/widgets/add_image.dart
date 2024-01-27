@@ -4,7 +4,6 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:permission_handler/permission_handler.dart';
 import 'package:project_fitcru/business_logic/blocs/image/image_upload/image_upload_cubit.dart';
 import 'package:project_fitcru/config/themes/theme.dart';
 import 'package:project_fitcru/presentation/widgets/error_dialog.dart';
