@@ -99963,7 +99963,7 @@ var $async$yP=A.B(function(a,b){if(a===1)return A.D(b,r)
 while(true)switch(s){case 0:m=A.b5x()
 m.a="GET"
 s=3
-return A.H(p.a.N1(0,"https://zenquotes.io/api/quotes",null,null,null,m,null,t.j),$async$yP)
+return A.H(p.a.N1(0,"https://getquotes-7mve4ox5dq-uc.a.run.app",null,null,null,m,null,t.j),$async$yP)
 case 3:o=b.a
 if(o==null)n=null
 else{n=J.d8(o,new A.aoF(),t.Yu)
