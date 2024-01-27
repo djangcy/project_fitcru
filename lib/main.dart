@@ -1,3 +1,6 @@
+// Original code by https://github.com/djangcy
+// Licensed under Mozilla Public License 2.0
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:project_fitcru/bootstrap.dart';

@@ -28,3 +28,7 @@ FitCrü was intended to be used with a sibling app that is used by one's 'traine
 ## How to Use FitCrü 🧭
 
 Visit the link ([FitCrü Web](https://project-fitcru.web.app/)). This is the web version of FitCrü and is intended for demo purposes. This app maintains a single user so that visitors do not need to make an account to interact with the app.
+
+## License
+
+This project is licensed under the [Mozilla Public License Version 2.0](LICENSE) - see [LICENSE](LICENSE) for more details.
