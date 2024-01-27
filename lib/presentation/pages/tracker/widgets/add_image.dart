@@ -1,13 +1,13 @@
 import 'dart:io';
 
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:permission_handler/permission_handler.dart';
 import 'package:project_fitcru/business_logic/blocs/image/image_upload/image_upload_cubit.dart';
 import 'package:project_fitcru/config/themes/theme.dart';
-import 'package:project_fitcru/presentation/message_constants.dart';
-import 'package:project_fitcru/presentation/widgets/widgets.dart';
+import 'package:project_fitcru/presentation/widgets/error_dialog.dart';
 
 import 'preview_images_dialog.dart';
 
@@ -27,56 +27,58 @@ class _AddImageWidgetState extends State<AddImageWidget> {
     _imagePicker = ImagePicker();
   }
 
-  Future<void> _selectMultiImage({
-    required void Function(List<Uint8List>) uploadImages,
-  }) async {
-    try {
-      List<XFile>? images = await _imagePicker?.pickMultiImage(
-        maxHeight: 1920,
-        maxWidth: 1080,
-      );
+  Future<void> uploadImage() async {
+    // final permissionStatus = await Permission.photos.request();
 
-      final List<XFile>? lostData = await _retrieveLostData(_imagePicker);
+    Uint8List? selected;
+
+    // MOBILE
+    if (!kIsWeb) { // && permissionStatus.isGranted
+      final ImagePicker picker = ImagePicker();
+      XFile? image = await picker.pickImage(source: ImageSource.gallery);
+
+      // Check for lost data (android)
+      final XFile? lostData = await _retrieveLostData(_imagePicker);
       if (lostData != null) {
-        images = lostData;
+        image = lostData;
       }
 
-      final List<File>? files = images?.map((e) => File(e.path)).toList();
-
-      if (files == null) {
-        return;
+      if (image != null) {
+        selected = await File(image.path).readAsBytes();
       }
-
-      // convert files to Uint8List.
-      final List<Uint8List> rawImageList = [];
-      for (final File file in files) {
-        rawImageList.add(await file.readAsBytes());
+    }
+    // WEB
+    else if (kIsWeb) {
+      final ImagePicker picker = ImagePicker();
+      final XFile? image = await picker.pickImage(source: ImageSource.gallery);
+      if (image != null) {
+        selected = await image.readAsBytes();
       }
+    }
 
-      // preview images in dialog before uploading.
-      if (rawImageList.isNotEmpty) {
-        WidgetsBinding.instance.addPostFrameCallback((_) {
-          PreviewImagesDialog.show(
-            context,
-            title: 'Upload these images?',
-            images: rawImageList,
-            onConfirm: () => uploadImages(rawImageList),
-          );
-        });
-      }
-    } on PlatformException catch (e) {
+    if (selected != null) {
+      WidgetsBinding.instance.addPostFrameCallback((_) {
+        PreviewImagesDialog.show(
+          context,
+          title: 'Upload these images?',
+          images: [selected!],
+          onConfirm: () =>
+              context.read<ImageUploadCubit>().uploadImages([selected!]),
+        );
+      });
+    } else {
       WidgetsBinding.instance.addPostFrameCallback((_) {
         ErrorDialog.show(
           context,
-          title: MessageConstants.generalError_title,
-          message: e.message ?? MessageConstants.generalError_body,
+          title: 'Error',
+          message: 'Something went wrong',
         );
       });
-    } catch (_) {}
+    }
   }
 
   /// Only runs on android.
-  Future<List<XFile>?> _retrieveLostData(
+  Future<XFile?> _retrieveLostData(
     ImagePicker? picker, {
     void Function()? onError,
   }) async {
@@ -86,9 +88,9 @@ class _AddImageWidgetState extends State<AddImageWidget> {
         if (response.isEmpty) {
           return null;
         }
-        final List<XFile>? files = response.files;
-        if (files != null) {
-          return files;
+        final XFile? file = response.file;
+        if (file != null) {
+          return file;
         } else {
           if (onError != null) {
             onError();
@@ -121,12 +123,7 @@ class _AddImageWidgetState extends State<AddImageWidget> {
         ),
       ),
       child: InkWell(
-        onTap: () {
-          _selectMultiImage(
-            uploadImages: (images) =>
-                context.read<ImageUploadCubit>().uploadImages(images),
-          );
-        },
+        onTap: uploadImage,
         child: const Icon(Icons.add_a_photo_outlined),
       ),
     );
