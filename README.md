@@ -1,5 +1,11 @@
 # FitCrü Fitness App 💪
 
+---
+
+**Note**: FitCrü was built with the intention of being an Android app and has been hosted as a web version (FitCrü Web) for easy accessibility for demonstration purposes. It is best experienced when accessed from a mobile device.
+
+---
+
 Welcome to FitCrü, a fitness app designed and developed as a demo/portfolio project using Flutter and Firebase. This application showcases a range of skills acquired during its creation, including mobile app development, database integration, and user interface design.
 
 FitCrü was intended to be used with a sibling app that is used by one's 'trainer'. The trainer's role is to set the exercises and nutritional plans. The app you're looking at is the client app that consumes this data, and allows the user to add information to track their progress, such as: a weight tracker, progress pictures, and intra-session data.
